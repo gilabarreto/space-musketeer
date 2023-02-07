@@ -23,6 +23,7 @@ let ship = {
 }
 
 let shipImg;
+let shipVelocityX = tileSize;
 
 window.onload = function () {
   board = document.getElementById("board");
@@ -38,6 +39,25 @@ window.onload = function () {
   shipImg = new Image();
   shipImg.src = "./musketeer.png"
   shipImg.onload = function () {
-    context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.heigth)
+    context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.heigth);
+  }
+
+  requestAnimationFrame(update);
+  document.addEventListener("keyddown", moveShip);
+}
+
+function update() {
+  requestAnimationFrame(update);
+
+  // ship
+  context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.heigth);
+
+}
+
+function moveShip(e) {
+  if(e.code == "ArrowLeft") {
+    ship.x -= shipVelocityX; // move left one tile
+  } else if (e.code == "ArrowRight") {
+    ship.x += shipVelocityX; // move right one tile
   }
 }
