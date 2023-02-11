@@ -25,18 +25,18 @@ let ship = {
 let shipImg;
 let shipVelocityX = tileSize; // ship moving speed
 
-// aliens
-let alienArray = [];
-let alienWidth = tileSize * 2;
-let alienHeight = tileSize;
-let alienX = tileSize;
-let alienY = tileSize;
-let alienImg;
+// tweeters
+let tweeterArray = [];
+let tweeterWidth = tileSize * 2;
+let tweeterHeight = tileSize;
+let tweeterX = tileSize;
+let tweeterY = tileSize;
+let tweeterImg;
 
-let alienRows = 2;
-let alienColumns = 3;
-let alienCount = 0; // number of aliens to defet
-let alienVelocityX = 1; // alien moving speed
+let tweeterRows = 2;
+let tweeterColumns = 3;
+let tweeterCount = 0; // number of tweeters to defet
+let tweeterVelocityX = 1; // tweeter moving speed
 
 
 window.onload = function () {
@@ -56,9 +56,9 @@ window.onload = function () {
     context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.heigth);
   }
 
-  alienImg = new Image();
-  alienImg.src = "./tweeter.png";
-  createAliens();
+  tweeterImg = new Image();
+  tweeterImg.src = "./tweeter.png";
+  createtweeters();
 
   requestAnimationFrame(update);
   document.addEventListener("keydown", moveShip);
@@ -72,11 +72,18 @@ function update() {
   context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.heigth);
 
 
-  //alien
-  for (let i = 0; i < alienArray.length; i++) {
-    let alien = alienArray[i];
-    if (alien.alive) {
-      context.drawImage(alienImg, alien.x, alien.y, alien.width, alien.height);
+  //tweeter
+  for (let i = 0; i < tweeterArray.length; i++) {
+    let tweeter = tweeterArray[i];
+    if (tweeter.alive) {
+      tweeter.x += tweeterVelocityX;
+
+      // if tweeter touches the borders
+      if (tweeter.x + tweeter.width >= board.width || tweeter.x <= 0) {
+        tweeterVelocityX *= -1;
+      }
+
+      context.drawImage(tweeterImg, tweeter.x, tweeter.y, tweeter.width, tweeter.height);
     }
   }
 }
@@ -89,20 +96,20 @@ function moveShip(e) {
   }
 }
 
-function createAliens() {
-  for (let c = 0; c < alienColumns; c++) {
-    for (let r = 0; r < alienRows; r++) {
-      let alien = {
-        img: alienImg,
-        x: alienX + c * alienWidth,
-        y: alienY + r * alienHeight,
-        width: alienWidth,
-        height: alienHeight,
+function createtweeters() {
+  for (let c = 0; c < tweeterColumns; c++) {
+    for (let r = 0; r < tweeterRows; r++) {
+      let tweeter = {
+        img: tweeterImg,
+        x: tweeterX + c * tweeterWidth,
+        y: tweeterY + r * tweeterHeight,
+        width: tweeterWidth,
+        height: tweeterHeight,
         alive: true
       }
 
-      alienArray.push(alien);
+      tweeterArray.push(tweeter);
     }
   }
-  alienCount = alienArray.length
+  tweeterCount = tweeterArray.length
 }
