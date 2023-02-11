@@ -81,6 +81,11 @@ function update() {
       // if tweeter touches the borders
       if (tweeter.x + tweeter.width >= board.width || tweeter.x <= 0) {
         tweeterVelocityX *= -1;
+
+        // move all tweeters up by one row
+        for (let j = 0; j < tweeterArray.length; j++) {
+          tweeterArray[j].y += tweeterHeight;
+        }
       }
 
       context.drawImage(tweeterImg, tweeter.x, tweeter.y, tweeter.width, tweeter.height);
