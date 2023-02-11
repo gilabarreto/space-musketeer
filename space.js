@@ -38,6 +38,10 @@ let tweeterColumns = 3;
 let tweeterCount = 0; // number of tweeters to defet
 let tweeterVelocityX = 1; // tweeter moving speed
 
+//bullets
+let bulletArray = [];
+let bulletVelocityY = -10; // bullet moving speed
+
 
 window.onload = function () {
   board = document.getElementById("board");
@@ -62,6 +66,7 @@ window.onload = function () {
 
   requestAnimationFrame(update);
   document.addEventListener("keydown", moveShip);
+  document.addEventListener("keyup", shoot);
 }
 
 function update() {
@@ -81,6 +86,7 @@ function update() {
       // if tweeter touches the borders
       if (tweeter.x + tweeter.width >= board.width || tweeter.x <= 0) {
         tweeterVelocityX *= -1;
+        tweeter.x += tweeterVelocityX * 2;
 
         // move all tweeters up by one row
         for (let j = 0; j < tweeterArray.length; j++) {
@@ -90,6 +96,14 @@ function update() {
 
       context.drawImage(tweeterImg, tweeter.x, tweeter.y, tweeter.width, tweeter.height);
     }
+  }
+
+  // bullets
+  for (let i = 0; i < bulletArray.length; i++) {
+    let bullet = bulletArray[i];
+    bullet.y += bulletVelocityY;
+    context.fillStyle = "white";
+    context.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
   }
 }
 
@@ -117,4 +131,18 @@ function createtweeters() {
     }
   }
   tweeterCount = tweeterArray.length
+}
+
+function shoot(e) {
+  if (e.code == "Space") {
+    //shoot
+    let bullet = {
+      x: ship.x + shipWidth * 15 / 32,
+      y: ship.y,
+      width: tileSize / 8,
+      height: tileSize / 2,
+      used: false
+    }
+    bulletArray.push(bullet);
+  }
 }
