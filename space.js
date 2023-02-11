@@ -43,21 +43,22 @@ window.onload = function () {
   }
 
   requestAnimationFrame(update);
-  document.addEventListener("keyddown", moveShip);
+  document.addEventListener("keydown", moveShip);
 }
 
 function update() {
   requestAnimationFrame(update);
 
+  context.clearRect(0, 0, board.width, board.height);
   // ship
   context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.heigth);
 
 }
 
 function moveShip(e) {
-  if(e.code == "ArrowLeft") {
+  if(e.code == "ArrowLeft" && ship.x - shipVelocityX >= 0) {
     ship.x -= shipVelocityX; // move left one tile
-  } else if (e.code == "ArrowRight") {
+  } else if (e.code == "ArrowRight" && ship.x + shipVelocityX + ship.width <= board.width) {
     ship.x += shipVelocityX; // move right one tile
   }
 }
