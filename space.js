@@ -104,6 +104,21 @@ function update() {
     bullet.y += bulletVelocityY;
     context.fillStyle = "white";
     context.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+
+    // bullet collision with tweeter
+for (let j =0; j < tweeterArray.length; j++) {
+  let tweeter = tweeterArray[j];
+  if(!bullet.used && tweeter.alive && detectCollision(bullet, tweeter)) {
+    bullet.used = true;
+    tweeter.alive = false;
+    tweeterCount--;
+  }
+}
+
+  }
+  // clear bullets
+  while (bulletArray.length > 0 && (bulletArray[0].used || bulletArray[0].y < 0)) {
+    bulletArray.shift(); // removes the first element of the array
   }
 }
 
@@ -145,4 +160,11 @@ function shoot(e) {
     }
     bulletArray.push(bullet);
   }
+}
+
+function detectCollision(a, b) {
+  return a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y;
 }
