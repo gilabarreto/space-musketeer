@@ -42,6 +42,8 @@ let tweeterVelocityX = 1; // tweeter moving speed
 let bulletArray = [];
 let bulletVelocityY = -10; // bullet moving speed
 
+let score = 0;
+let gameOver = false;
 
 window.onload = function () {
   board = document.getElementById("board");
@@ -72,6 +74,10 @@ window.onload = function () {
 function update() {
   requestAnimationFrame(update);
 
+  if (gameOver) {
+    return;
+  }
+
   context.clearRect(0, 0, board.width, board.height);
   // ship
   context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.heigth);
@@ -95,6 +101,10 @@ function update() {
       }
 
       context.drawImage(tweeterImg, tweeter.x, tweeter.y, tweeter.width, tweeter.height);
+
+      if (tweeter.y >= ship.y) {
+        gameOver = true;
+      }
     }
   }
 
@@ -106,23 +116,45 @@ function update() {
     context.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
 
     // bullet collision with tweeter
-for (let j =0; j < tweeterArray.length; j++) {
-  let tweeter = tweeterArray[j];
-  if(!bullet.used && tweeter.alive && detectCollision(bullet, tweeter)) {
-    bullet.used = true;
-    tweeter.alive = false;
-    tweeterCount--;
-  }
-}
+    for (let j = 0; j < tweeterArray.length; j++) {
+      let tweeter = tweeterArray[j];
+      if (!bullet.used && tweeter.alive && detectCollision(bullet, tweeter)) {
+        bullet.used = true;
+        tweeter.alive = false;
+        tweeterCount--;
+        score += 100;
+      }
+    }
 
   }
   // clear bullets
   while (bulletArray.length > 0 && (bulletArray[0].used || bulletArray[0].y < 0)) {
     bulletArray.shift(); // removes the first element of the array
   }
+
+  // next level
+  if (tweeterCount == 0) {
+    // increase the number of tweeters in columns and rows by 1
+    tweeterColumns = Math.min(tweeterColumns + 1, columns / 2 - 2); // cap at 16 / 2 - 2 = 6
+    tweeterRows = Math.min(tweeterRows + 1, rows - 4); // cap at 16 - 4 = 12
+    tweeterVelocityX *= 1.2; // increase the tweeter movement speed
+    tweeterArray = [];
+    bulletArray = [];
+    createtweeters();
+  }
+
+  // score
+  context.fillStyle = " white";
+  context.font = "16px courier";
+  context.fillText(score, 5, 20);
+
 }
 
 function moveShip(e) {
+  if (gameOver) {
+    return;
+  }
+
   if (e.code == "ArrowLeft" && ship.x - shipVelocityX >= 0) {
     ship.x -= shipVelocityX; // move left one tile
   } else if (e.code == "ArrowRight" && ship.x + shipVelocityX + ship.width <= board.width) {
@@ -149,6 +181,10 @@ function createtweeters() {
 }
 
 function shoot(e) {
+  if (gameOver) {
+    return;
+  }
+
   if (e.code == "Space") {
     //shoot
     let bullet = {
