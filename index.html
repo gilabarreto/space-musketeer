@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +9,81 @@
   <link rel="stylesheet" href="space.css">
   <script src="space.js"></script>
 </head>
+
 <body>
-  <h1>Space Musketeer</h1>
-  <canvas id="board"></canvas>
+  <div id="main">
+    <div class="main-left">
+      <div class="main-left-top">
+        <img src="./musketeer-main.png">
+      </div>
+      <div class="main-left-bottom">
+        <span class="slogan">Let that sink in!</span>
+        <h2>
+          - <span class="game-link">Game</span>
+          - <span class="about-link">About</span>
+          - <span class="help-link">Help</span> -
+        </h2>
+        <br>
+        <img src="./musketeer-cartoon.png" class="musketeer-cartoon">
+        </br>
+      </div>
+    </div>
+    <div class="main-middle">
+      <h1>Space Musketeer</h1>
+      <br>
+      <div class="about active">
+        <div class="about-text">
+          Space Musketeers is a space adventure game where you play as Elon the Musketeer, a space ranger, trying to
+          colonize Mars. However, it's already inhabited by hostile aliens called Tweeters who oppose the colonization.
+          Elon must use his spacecraft, the EagleY, to defeat the Tweeters and secure the safety of colonists. The
+          player
+          must participate in battles using the EagleY's weapons.
+          <p>
+            Victor Gila Barreto, a Full Stack Web Developer and retro game enthusiast, re-created and developed the
+            game. <a href="https://github.com/gilabarreto" target="_blank">Click here</a> to learn more about the
+            author and his other projects.
+          </p>
+          <p>
+            <span class="game-link">Play Space Musketeers</span>
+          </p>
+        </div>
+      </div>
+      <canvas class="board"></canvas>
+      </br>
+      <div class="help">
+        <iframe height="512px" width="512px" src="https://www.youtube.com/embed/Bti9_deF5gs" title="Help" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 </body>
+<script>
+  // Add game, remove the others
+  const gameLinks = document.querySelectorAll(".game-link");
+  gameLinks.forEach(gameLink => {
+    gameLink.addEventListener("click", function () {
+      document.querySelector(".board").classList.add("active");
+      document.querySelector(".about").classList.remove("active");
+      document.querySelector(".help").classList.remove("active");
+    });
+  });
+
+
+  // Add about section, remove the others
+  document.querySelector(".about-link").addEventListener("click", function () {
+    document.querySelector(".about").classList.add("active");
+    document.querySelector(".board").classList.remove("active");
+    document.querySelector(".help").classList.remove("active");
+  });
+
+  // Add help section, remove the others
+  document.querySelector(".help-link").addEventListener("click", function () {
+    document.querySelector(".help").classList.add("active");
+    document.querySelector(".board").classList.remove("active");
+    document.querySelector(".about").classList.remove("active");
+  });
+
+</script>
+
 </html>

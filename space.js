@@ -46,7 +46,7 @@ let score = 0;
 let gameOver = false;
 
 window.onload = function () {
-  board = document.getElementById("board");
+  board = document.querySelector(".board");
   board.width = boardWidth;
   board.height = boardHeight;
   context = board.getContext("2d"); // use for drawing on the board
