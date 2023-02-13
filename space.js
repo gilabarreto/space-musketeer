@@ -1,4 +1,4 @@
-// board
+// Board size and position
 let tileSize = 32;
 let rows = 16;
 let columns = 16;
@@ -8,8 +8,7 @@ let boardWidth = tileSize * columns; // 32 * 16
 let boardHeight = tileSize * rows; // 32 * 16
 let context;
 
-// Ship
-
+// Ship size and position
 let shipWidth = tileSize * 4;
 let shipHeight = tileSize * 2;
 let shipX = tileSize * columns / 2 - tileSize;
@@ -23,9 +22,10 @@ let ship = {
 }
 
 let shipImg;
-let shipVelocityX = tileSize; // ship moving speed
+// Ship moving speed
+let shipVelocityX = tileSize;
 
-// tweeters
+// Tweeters size and position
 let tweeterArray = [];
 let tweeterWidth = tileSize * 2;
 let tweeterHeight = tileSize;
@@ -35,12 +35,15 @@ let tweeterImg;
 
 let tweeterRows = 2;
 let tweeterColumns = 3;
-let tweeterCount = 0; // number of tweeters to defet
-let tweeterVelocityX = 1; // tweeter moving speed
+// Number of tweeters to defet
+let tweeterCount = 0;
+// Tweeter moving speed
+let tweeterVelocityX = 1;
 
-// bullets
+// Number of bullets bullets
 let bulletArray = [];
-let bulletVelocityY = -10; // bullet moving speed
+// Bullet moving speed
+let bulletVelocityY = -10;
 
 let score = 0;
 let gameOver = false;
