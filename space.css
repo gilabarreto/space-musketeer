@@ -66,6 +66,11 @@ body {
   transition: 300ms;
 }
 
+.about-play {
+  font-family: "Musketeer", sans-serif;
+  text-align: center;
+}
+
 .board {
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -77,7 +82,7 @@ body {
 }
 
 .about-text {
-  padding: 5%;
+  padding: 10%;
   font-size: 0.7em;
   line-height: 1.5;
   font-family: 'Courier New', Courier, monospace;
