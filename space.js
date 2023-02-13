@@ -30,7 +30,7 @@ let tweeterArray = [];
 let tweeterWidth = tileSize * 2;
 let tweeterHeight = tileSize;
 let tweeterX = tileSize;
-let tweeterY = tileSize;
+let tweeterY = tileSize * 2;
 let tweeterImg;
 
 let tweeterRows = 2;
