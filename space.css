@@ -27,7 +27,7 @@ body {
   background-image: url(./public/imgs/sm-bg.png);
   background-position: bottom right;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   overflow-y: hidden;
   overflow-x: hidden;
 }
