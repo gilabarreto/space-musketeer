@@ -7,25 +7,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Space Musketeer</title>
   <link rel="stylesheet" href="space.css">
-  <script src="space.js"></script>
+  <meta name="description" content="Defend Mars from the Tweeters in this Space Invaders remake.">
+  <meta property="og:title" content="Space Musketeer">
+  <meta property="og:description" content="Defend Mars from the Tweeters in this Space Invaders remake.">
+  <meta property="og:image" content="https://gilabarreto.github.io/space-musketeer/public/imgs/og.png">
+  <meta property="og:url" content="https://gilabarreto.github.io/space-musketeer/">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="space.js" defer></script>
 </head>
 
 <body>
   <div id="main">
     <div class="main-left">
       <div class="main-left-top">
-        <img src="./public/imgs/musketeer-main.png">
+        <img src="./public/imgs/musketeer-main.png" alt="Elon the Musketeer with two Tweeters">
       </div>
       <div class="main-left-bottom">
         <span class="slogan">Let that sink in!</span>
         <h2>
-          - <span class="game-link">Game</span>
-          - <span class="about-link">About</span>
-          - <span class="help-link">Help</span> -
+          - <button class="game-link">Game</button>
+          - <button class="about-link">About</button>
+          - <button class="help-link">Help</button> -
         </h2>
-        <br>
-        <img src="./public/imgs/musketeer-cartoon.png" class="musketeer-cartoon">
-        </br>
+        <img src="./public/imgs/musketeer-cartoon.png" class="musketeer-cartoon" alt="Cartoon Elon the Musketeer">
       </div>
     </div>
     <div class="main-middle">
@@ -41,17 +45,14 @@
             game. <a href="https://github.com/gilabarreto" target="_blank">Click here</a> to learn more about the
             author and his other projects.
           </p>
-          <p>
-          <div class="about-play">
-            <span class="game-link">- Play Space Musketeers -</span>
-          </div>
+          <p class="about-play">
+            <button class="game-link">- Play Space Musketeers -</button>
           </p>
         </div>
       </div>
       <canvas class="board"></canvas>
-      </br>
       <div class="help">
-        <iframe height="512px" width="512px" src="https://www.youtube.com/embed/Bti9_deF5gs" title="Help"
+        <iframe height="512" width="512" data-src="https://www.youtube.com/embed/Bti9_deF5gs?enablejsapi=1" title="Help"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
@@ -59,32 +60,5 @@
     </div>
   </div>
 </body>
-<script>
-  // Add game, remove the others
-  const gameLinks = document.querySelectorAll(".game-link");
-  gameLinks.forEach(gameLink => {
-    gameLink.addEventListener("click", function () {
-      document.querySelector(".board").classList.add("active");
-      document.querySelector(".about").classList.remove("active");
-      document.querySelector(".help").classList.remove("active");
-    });
-  });
-
-
-  // Add about section, remove the others
-  document.querySelector(".about-link").addEventListener("click", function () {
-    document.querySelector(".about").classList.add("active");
-    document.querySelector(".board").classList.remove("active");
-    document.querySelector(".help").classList.remove("active");
-  });
-
-  // Add help section, remove the others
-  document.querySelector(".help-link").addEventListener("click", function () {
-    document.querySelector(".help").classList.add("active");
-    document.querySelector(".board").classList.remove("active");
-    document.querySelector(".about").classList.remove("active");
-  });
-
-</script>
 
 </html>

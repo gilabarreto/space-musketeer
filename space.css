@@ -53,9 +53,12 @@ body {
   display: block;
 }
 
-.game-link,
-.about-link,
-.help-link {
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
   cursor: pointer;
 }
 
@@ -97,6 +100,7 @@ body {
 
 .musketeer-cartoon {
   height: 50%;
+  margin-top: 20px;
 }
 
 .main-left {
