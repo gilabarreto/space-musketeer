@@ -86,7 +86,11 @@ function handleKeyDown(e) {
   if (!board.classList.contains("active") || e.key === "Tab") return;
   // Keep space and arrows from clicking buttons or scrolling the page
   if ([" ", "ArrowLeft", "ArrowRight"].includes(e.key)) e.preventDefault();
+  press(e.key, e.repeat);
+}
 
+// Shared by the keyboard and the on-screen touch buttons
+function press(key, repeat = false) {
   if (state === "start") {
     state = "playing";
   } else if (state === "over") {
@@ -95,12 +99,22 @@ function handleKeyDown(e) {
       resetGame();
       state = "playing";
     }
-  } else if (e.key === " " && !e.repeat) {
+  } else if (key === " " && !repeat) {
     shoot();
-  } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-    keys.add(e.key);
+  } else if (key === "ArrowLeft" || key === "ArrowRight") {
+    keys.add(key);
   }
 }
+
+// Touch buttons: arrows move while held, FIRE shoots (and starts the game)
+for (const button of document.querySelectorAll(".touch-controls button")) {
+  const key = button.dataset.key;
+  button.addEventListener("pointerdown", (e) => { e.preventDefault(); press(key); });
+  for (const type of ["pointerup", "pointercancel", "pointerleave"]) {
+    button.addEventListener(type, () => keys.delete(key));
+  }
+}
+const touchLayout = matchMedia("(max-width: 800px)");
 
 // The update function is called on each animation frame
 function update(now) {
@@ -145,11 +159,11 @@ function update(now) {
   // Display a message if the game isn't running
   context.textAlign = "center";
   if (state === "start") {
-    context.fillText("- Press any key to start -", board.width / 2, board.height / 2);
+    context.fillText(touchLayout.matches ? "- Tap FIRE to start -" : "- Press any key to start -", board.width / 2, board.height / 2);
   } else if (state === "over") {
     context.fillStyle = "#ffff00"; // same yellow as the page title
     context.fillText("- Game Over -", board.width / 2, board.height / 2);
-    context.fillText("- Press any key to restart -", board.width / 2, board.height / 2 + 30);
+    context.fillText(touchLayout.matches ? "- Tap FIRE to restart -" : "- Press any key to restart -", board.width / 2, board.height / 2 + 30);
   }
 }
 
