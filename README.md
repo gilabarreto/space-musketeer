@@ -1,6 +1,6 @@
 # Space Musketeer - [https://gilabarreto.github.io/space-musketeer/](https://gilabarreto.github.io/space-musketeer/)
 
-Space Musketeers is a space game where you play Elon the Musketeer, a space ranger trying to colonize Mars. The planet is inhabited by hostile aliens, Tweeters, who oppose colonization. You must use your spacecraft, the EagleY, to defeat them and ensure the safety of colonists.
+Space Musketeer is a space game where you play Elon the Musketeer, a space ranger trying to colonize Mars. The planet is inhabited by hostile aliens, Tweeters, who oppose colonization. You must use your spacecraft, the EagleY, to defeat them and ensure the safety of colonists.
 
 This project was build with HTML, CSS and JS in order to practise my front-end skills and have some fun. :-)
 
