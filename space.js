@@ -147,6 +147,7 @@ function update(now) {
   if (state === "start") {
     context.fillText("- Press any key to start -", board.width / 2, board.height / 2);
   } else if (state === "over") {
+    context.fillStyle = "#ffff00"; // same yellow as the page title
     context.fillText("- Game Over -", board.width / 2, board.height / 2);
     context.fillText("- Press any key to restart -", board.width / 2, board.height / 2 + 30);
   }
